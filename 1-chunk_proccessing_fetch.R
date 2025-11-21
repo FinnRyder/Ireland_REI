@@ -77,7 +77,7 @@ process_chunk <- function(chunk, bearings, fetch_coast, max_distance, append = T
   ### Write combined chunk to CSV
   write.table(
     combined_chunk, 
-    file = 'fetch_area_4_processed_v1.csv', 
+    file = 'fetch_area_5_processed_v1.csv', 
     append = append, 
     quote = FALSE, 
     col.names = !append,
@@ -100,5 +100,6 @@ with_progress({
     }
   )
 })
+
 
 
