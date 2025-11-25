@@ -5,9 +5,7 @@ library(terra)
 
 # Load data ----
 area_five <- rast("area_five_REI_normalised_10km.tif")
-dist <- rast("distance_to_land.tif")  ### in km
-dist_crop <- crop(dist, area_five) ### for only area 5 (use 'dist' for all areas)
-dist_crop <- resample(dist_crop, area_five, method = "near")### resample for same extent
+dist <- rast("distance_to_land_crop.tif")  ### in km
 
 # Define a radius by distance function (in meters) ----
 smooth_radius_fun <- function(d) {
@@ -19,7 +17,7 @@ smooth_radius_fun <- function(d) {
 }
 
 ## Compute per-pixel radius
-radius_raster <- app(dist_crop, smooth_radius_fun)
+radius_raster <- app(dist, smooth_radius_fun)
 
 ## Plot
 plot(radius_raster)
@@ -54,7 +52,7 @@ for (i in seq_along(radius_values)) {
   
   if (radius_m <= cellsize) next  ### skip trivial radius
   
-  mask_band <- classify(dist_crop, 
+  mask_band <- classify(dist, 
                         matrix(c(-Inf, distance_breaks[i], NA,
                                  distance_breaks[i], distance_breaks[i + 1], 1,
                                  distance_breaks[i + 1], Inf, NA),
@@ -75,4 +73,5 @@ plot(r_smooth_adaptive)
 
 # Save ----
 writeRaster(r_smooth_adaptive, "REI_focal_by_dist_v1.tif", overwrite = F)
+
 
