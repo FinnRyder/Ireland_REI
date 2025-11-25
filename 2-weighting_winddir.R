@@ -19,17 +19,17 @@ wind_props <- app(wind_dir, function(x) {
 })
 names(wind_props) <- paste0("dir_", 1:32)
 
-## data check
+## Data check
 app(wind_props, sum) ###confirm sum proportions equal 1
 
 
-# resample ----
-##50 m resolution (cublic spline to reduce artifacts)
+# Resample ----
+## 50m resolution (cublic spline to reduce artifacts)
 target_rast <- rast(ext = ext(wind_dir), resolution = 50, crs = crs(wind_dir))
 
 wind_props_smooth <- terra::resample(wind_props, target_rast, method = "cubicspline")
 
-# normalise function fo IDs (this was only needed for original run)
+### normalise function for IDs (this was only needed for original run)
 normalize_ids <- function(x) {
   ### detect IDs with E prefix
   has_E <- grepl("^E", x)
@@ -117,17 +117,19 @@ crs(r_template) <- crs(v_proj)
 r_exposure <- rasterize(v_proj, r_template, field = "total_exposure", fun = "max")
 
 
-# Plot it ----
+## Plot
 plot(r_exposure)
 
 
-# Any NA values that resulted from the point to raster conversion were filled with the surrounding mean values.
+## Any NA values that resulted from the point to raster conversion were filled with the surrounding mean values.
 r_exposure_filled<-focal(r_exposure, w=3, fun=max, na.policy="only", na.rm=T)
 
 plot(r_exposure_filled)
 
+# Save ----
 #writeRaster(r_exposure_filled, "weighted_log_sum_exposure_normalised_focal_10km_v3.tif", overwrite = TRUE)
 
 # Save as GeoPackage
 #st_write(all_areas, "all_weighted_fetch_normalised_10km_v3.shp")
+
 
