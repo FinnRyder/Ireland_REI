@@ -1,23 +1,23 @@
 # The purpose of this file is to calculate fetch for the coastline of Ireland in chunks, writing a csv file as it processes.
 
-# Packages needed----
+# Packages needed ----
 library(future)
 library(furrr)
-library(dplyr)
+library(tidyverse)
 library(waver)
 library(sf)
 library(leaflet)
 library(ggplot2)
 library(progressr)
 
-# Read the data----
-fetch_area_5<-read.csv('area_5.csv')# smallest area for testing
-fetch_coast <- st_read("IRE.shp")
+# Read the data ----
+fetch_area_5<-read.csv('area_5.csv') ### smallest area for testing
+fetch_coast <- st_read("IRE.shp") ### only Ireland needed for area 5
 
-# This is needed to combine all the landmasses. results will be inaccurate otherwise
+## This is needed to combine all the landmasses. results will be inaccurate otherwise
 fetch_coast <- st_union(fetch_coast)
 
-# Points need to be sf object
+## Points need to be sf object
 points_sf<-st_as_sf(fetch_area_5,coords = c('long','lat'),crs=st_crs(fetch_coast))
 
 
@@ -25,7 +25,7 @@ points_sf<-st_as_sf(fetch_area_5,coords = c('long','lat'),crs=st_crs(fetch_coast
 ## For test running and debugging
 ggplot() +
   geom_sf(data = fetch_coast, fill = "lightblue", color = "darkblue", alpha = 0.5) +  
-  geom_sf(data = points_sf, color = "red", size = 2) +  # Points
+  geom_sf(data = points_sf, color = "red", size = 2) +
   theme_minimal()
 
 # Fetch calculation inputs ----
@@ -100,6 +100,7 @@ with_progress({
     }
   )
 })
+
 
 
 
