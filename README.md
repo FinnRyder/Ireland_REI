@@ -28,3 +28,7 @@ Files
 **mean_wind_01082014_31082019.zipx** -  - Mera mean wind speed data.
 
 **distance_to_land_crop.tif** - Distance to land raster for inner Galway Bay. Used for focal smoothing.
+
+
+Acknowledgments
+---------
