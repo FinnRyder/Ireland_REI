@@ -2,7 +2,7 @@
 Code used to create a relative exposure index for the coastline of Ireland. Workflow is limited to one section of coastline due to file size constraints. 
 area_5 (inner Galway Bay) is the smallest area and therefore the area for testing code.
 
-Code
+📄 Code
 ---------
 
 **1-chunk_processing_fetch.R** - Generates basic fetch distances in 32 directions.
@@ -13,8 +13,10 @@ Code
 
 **4-focal_smoothing.R** - Applies a guassian smoothing function to the REI, creating the final dataset.
 
+**6-extract_REI.R** - Extracts REI values from a csv file containing GPS coordinates.
 
-Files
+
+📁 Files
 ---------
 
 **IRE.zip** - Coastline data for Ireland only.
@@ -29,7 +31,11 @@ Files
 
 **distance_to_land_crop.tif** - Distance to land raster for inner Galway Bay. Used for focal smoothing.
 
+🔗 Links
+---------
 
-Acknowledgments
+
+
+🤝 Acknowledgments
 ---------
 Thank you to Met Éireann and the Marine Institute for providing the data to create and validate the relative exposure index. This work was funded by the Department of Housing, Local Government and Heritage, Republic of Ireland.
