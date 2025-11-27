@@ -13,6 +13,8 @@ area_5 (inner Galway Bay) is the smallest area and therefore the area for testin
 
 **4-focal_smoothing.R** - Applies a guassian smoothing function to the REI, creating the final dataset.
 
+**5-validation.R** - Correlation analysis of the REI and SWAN model.
+
 **6-extract_REI.R** - Extracts REI values from a csv file containing GPS coordinates.
 
 
