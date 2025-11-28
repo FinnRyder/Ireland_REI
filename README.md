@@ -33,6 +33,10 @@ area_5 (inner Galway Bay) is the smallest area and therefore the area for testin
 
 **distance_to_land_crop.tif** - Distance to land raster for inner Galway Bay. Used for focal smoothing. Used in ```4-focal_smoothing.R```.
 
+**irish_shelf_overall_max_hs.tif** - SWAN model outputs for validation. Used in ```5-validation.R```.
+
+**irish_shelf_overall_mean_hs.tif** - SWAN model outputs for validation. Used in ```5-validation.R```.
+
 **waypoints.csv** - GPS points for example of extracting REI values. Used in ```6-extract_REI.R```.
 
 **processed_cleaned_part_area_5.csv** - Looking at deleting this file. Redundant with area_5.
