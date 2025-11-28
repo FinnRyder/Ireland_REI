@@ -59,7 +59,7 @@ all_areas <- purrr::map_dfr(area_ids, function(area_num) {
   fetch_df <- read.csv(fetch_file, header = T)
 
   ### Load points file
-  points_file <- sprintf('./processed_cleaned_part_area_%s.csv', area_num)
+  points_file <- sprintf('./area_%s.csv', area_num) ### bug check this line.
   points <- read.csv(points_file)
   points_sf <- st_as_sf(points, coords = c("long", "lat"), crs = 4326)
   points_vect <- vect(st_transform(points_sf, crs = crs(wind_dir)))
@@ -131,5 +131,6 @@ plot(r_exposure_filled)
 
 # Save as GeoPackage
 #st_write(all_areas, "all_weighted_fetch_normalised_10km_v3.shp")
+
 
 
