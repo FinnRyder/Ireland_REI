@@ -35,7 +35,7 @@ area_5 (inner Galway Bay) is the smallest area and therefore the area for testin
 
 **waypoints.csv** - GPS points for example of extracting REI values. Used in ```6-extract_REI.R```.
 
-**processed_cleaned_part_area_5.csv** 
+**processed_cleaned_part_area_5.csv** - Looking at deleting this file. Redundant with area_5.
 
 
 
