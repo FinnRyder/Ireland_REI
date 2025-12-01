@@ -6,20 +6,21 @@ library(furrr)
 library(tidyverse)
 library(waver)
 library(sf)
-library(leaflet)
-library(ggplot2)
 library(progressr)
+library(utils)
+library(terra)
 
-# Read the data ----
-fetch_area_5<-read.csv('area_5.csv') ### smallest area for testing
-fetch_coast <- st_read("IRE.shp") ### only Ireland needed for area 5
+# Read data ----
+fetch_area_5<-read.csv('area_5.csv') ### Smallest area for testing
+zip_file <- "IRL.zip"
+unzip(zip_file)
+fetch_coast <- st_read("IRL.shp") ### Only Ireland needed for area 5
 
 ## This is needed to combine all the landmasses. results will be inaccurate otherwise
 fetch_coast <- st_union(fetch_coast)
 
 ## Points need to be sf object
 points_sf<-st_as_sf(fetch_area_5,coords = c('long','lat'),crs=st_crs(fetch_coast))
-
 
 # Visualise ----
 ## For test running and debugging
@@ -40,7 +41,7 @@ max_distance<-200000 ### In meters
 plan(multisession)  
 
 ## Define the chunk size (a chunk size of 80-120 seems to work well)
-chunk_size <- ceiling(nrow(points_sf) / 15000)
+chunk_size <- ceiling(nrow(points_sf) / 1000) ### Change number based on chunk size
 
 ## Split the points into chunks
 chunks <- split(points_sf, ceiling(seq_along(1:nrow(points_sf)) / chunk_size))
@@ -100,7 +101,3 @@ with_progress({
     }
   )
 })
-
-
-
-
