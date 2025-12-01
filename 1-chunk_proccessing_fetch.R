@@ -1,4 +1,5 @@
 # The purpose of this file is to calculate fetch for the coastline of Ireland in chunks, writing a csv file as it processes.
+# This script will probably run for 10 or so hours
 
 # Packages needed ----
 library(future)
@@ -101,3 +102,4 @@ with_progress({
     }
   )
 })
+
