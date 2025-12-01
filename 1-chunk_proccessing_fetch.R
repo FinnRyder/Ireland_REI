@@ -1,5 +1,5 @@
 # The purpose of this file is to calculate fetch for the coastline of Ireland in chunks, writing a csv file as it processes.
-# This script will probably run for 10 or so hours
+## This script will probably run for 10 or so hours
 
 # Packages needed ----
 library(future)
@@ -12,16 +12,16 @@ library(utils)
 library(terra)
 
 # Read data ----
-fetch_area_5<-read.csv('area_5.csv') ### Smallest area for testing
-zip_file <- "IRL.zip"
+fetch_area_5<- read.csv('area_5.csv') ### Smallest area for testing
+zip_file<- "IRL.zip"
 unzip(zip_file)
-fetch_coast <- st_read("IRL.shp") ### Only Ireland needed for area 5
+fetch_coast<- st_read("IRL.shp") ### Only Ireland needed for area 5
 
 ## This is needed to combine all the landmasses. results will be inaccurate otherwise
 fetch_coast <- st_union(fetch_coast)
 
 ## Points need to be sf object
-points_sf<-st_as_sf(fetch_area_5,coords = c('long','lat'),crs=st_crs(fetch_coast))
+points_sf<- st_as_sf(fetch_area_5,coords = c('long','lat'),crs=st_crs(fetch_coast))
 
 # Visualise ----
 ## For test running and debugging
@@ -31,27 +31,27 @@ ggplot() +
   theme_minimal()
 
 # Fetch calculation inputs ----
-num_intervals<-32
+num_intervals<- 32
 bearing_step<- 360/num_intervals
-bear_seq<-seq(0,360-bearing_step,by=bearing_step)
+bear_seq<- seq(0,360-bearing_step,by=bearing_step)
 print(bear_seq)
-max_distance<-200000 ### In meters
+max_distance<- 200000 ### In meters
 
 # Parallel processing ----
 ## Set up for parallel processing (multisession compatible with Windows)
 plan(multisession)  
 
 ## Define the chunk size (a chunk size of 80-120 seems to work well)
-chunk_size <- ceiling(nrow(points_sf) / 1000) ### Change number based on chunk size
+chunk_size<- ceiling(nrow(points_sf) / 1000) ### Change number based on chunk size
 
 ## Split the points into chunks
-chunks <- split(points_sf, ceiling(seq_along(1:nrow(points_sf)) / chunk_size))
+chunks<- split(points_sf, ceiling(seq_along(1:nrow(points_sf)) / chunk_size))
 
 ## Change working directory to local/temp (onedrive causes problems when running for multiple days)
 setwd("C:/Temp")
 
 ## Define the function to process each chunk and save directly to a csv
-process_chunk <- function(chunk, bearings, fetch_coast, max_distance, append = TRUE) {
+process_chunk<- function(chunk, bearings, fetch_coast, max_distance, append = TRUE) {
   chunk_results <- lapply(1:nrow(chunk), function(i) {
     ### Extract latitude and longitude
     coords <- st_coordinates(chunk[i, ])
@@ -102,4 +102,5 @@ with_progress({
     }
   )
 })
+
 
