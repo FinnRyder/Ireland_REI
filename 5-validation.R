@@ -1,4 +1,5 @@
 # The purpose of this file is to validate the relative exposure index
+## Unlike the previous files, this one uses the whole REI not just area 5
 
 # Packages needed ----
 library(terra)
@@ -124,4 +125,5 @@ tiff(filename = 'validation_plot_combined.tif',res=300,width =20, height=10, uni
 ggarrange(p_mean2,p_max2,ncol=2,labels = c("(a)","(b)"))
 
 dev.off()
+
 
