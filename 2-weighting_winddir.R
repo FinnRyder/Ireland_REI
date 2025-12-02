@@ -131,10 +131,11 @@ r_exposure_filled<-focal(r_exposure, w=3, fun=max, na.policy="only", na.rm=T)
 plot(r_exposure_filled)
 
 # Save ----
-#writeRaster(r_exposure_filled, "weighted_log_sum_exposure_normalised_focal_10km_v3.tif", overwrite = TRUE)
+#writeRaster(r_exposure_filled, "all_galway_bay_nomalised_fetch_dist.tif", overwrite = TRUE)
 
 # Save as GeoPackage
-#st_write(all_areas, "all_weighted_fetch_normalised_10km_v3.shp")
+#st_write(all_areas, "all_weighted_fetch_normalised.shp")
+
 
 
 
