@@ -4,11 +4,16 @@
 library(sf)
 library(terra)
 library(tidyverse)
-library(ggplot2)
 library(purrr)
+library(archive)
 
 # Load MERA direction data ---- 
-wind_dir <- rast('./galway_wind_dir_01082014_31082019.nc')
+zip_file<- "galway_wind_dir_01082014_31082019.zipx"
+archive_extract(zip_file)
+wind_dir<- rast('./galway_wind_dir_01082014_31082019.nc')
+
+zip_file2<- "fetch_area_5_processed_cleaned_v1.zipx"
+archive_extract(zip_file2)
 
 # Define 32 directional bins ----
 bin_edges <- seq(0, 360, by = 11.25)
@@ -21,7 +26,6 @@ names(wind_props) <- paste0("dir_", 1:32)
 
 ## Data check
 app(wind_props, sum) ###confirm sum proportions equal 1
-
 
 # Resample ----
 ## 50m resolution (cublic spline to reduce artifacts)
@@ -131,6 +135,7 @@ plot(r_exposure_filled)
 
 # Save as GeoPackage
 #st_write(all_areas, "all_weighted_fetch_normalised_10km_v3.shp")
+
 
 
 
