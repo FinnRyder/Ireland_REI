@@ -1,5 +1,5 @@
 # Ireland_REI
-Code used to create a relative exposure index for the coastline of Ireland. The main workflow (scripts1 - 4) is limited to one section of coastline due to file size constraints. 
+Code used to create a relative exposure index for the coastline of Ireland. The main workflow (scripts 1 - 4) is limited to one section of coastline due to file size constraints. 
 area_5 (inner Galway Bay) is the smallest area and therefore the area for testing code.  
 
 📄 Code
@@ -42,12 +42,6 @@ area_5 (inner Galway Bay) is the smallest area and therefore the area for testin
 **Ireland_REI** - The relative exposure index. Created in ```4-focal_smoothing.R```. Used in ```5-validation.R``` and ```6-extract_REI.R```.
 
 
-
-🔗 Links
----------
-
-
-
 🤝 Acknowledgments
 ---------
-Thank you to Met Éireann and the Irish Marine Institute for providing the data to create and validate the relative exposure index. This work was funded by the Department of Housing, Local Government and Heritage, Republic of Ireland.
+Thank you to Met Éireann, Ireland’s National Meteorological Service for providing the wind data (```mean_wind_01082014_31082019.zipx``` and ```galway_wind_dir01082014_31082019.zipx```) used to create the relative exposure index. Thanks also to the Irish Marine Institute for providing the SWAN model data (```irish_shelf_overall_mean_hs.tif``` and ```irish_shelf_overall_max_hs.tif```) used to validate the REI. This work was funded by the Department of Housing, Local Government and Heritage, Republic of Ireland.
