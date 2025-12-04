@@ -1,4 +1,7 @@
 # Ireland_REI
+
+[![DOI](https://zenodo.org/badge/1085096005.svg)](https://doi.org/10.5281/zenodo.17817079)
+
 Code used to create a relative exposure index for the coastline of Ireland. The main workflow (scripts 1 - 4) is limited to one section of coastline due to file size constraints. 
 area_5 (inner Galway Bay) is the smallest area and therefore the area for testing code.  
 
